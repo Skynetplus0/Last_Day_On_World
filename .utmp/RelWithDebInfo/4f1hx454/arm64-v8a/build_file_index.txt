@@ -1,0 +1,2 @@
+C:\Users\Asus\Desktop\Unity Projects\Last_Day_On_World1\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\CMakeLists.txt
+C:\Users\Asus\Desktop\Unity Projects\Last_Day_On_World1\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\CMakeLists.txt

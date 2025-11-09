@@ -1,0 +1,5 @@
+C:/Users/Asus/Desktop/Unity Projects/Last_Day_On_World1/.utmp/RelWithDebInfo/4f1hx454/arm64-v8a/CMakeFiles/edit_cache.dir
+C:/Users/Asus/Desktop/Unity Projects/Last_Day_On_World1/.utmp/RelWithDebInfo/4f1hx454/arm64-v8a/CMakeFiles/rebuild_cache.dir
+C:/Users/Asus/Desktop/Unity Projects/Last_Day_On_World1/.utmp/RelWithDebInfo/4f1hx454/arm64-v8a/GameActivity/CMakeFiles/game.dir
+C:/Users/Asus/Desktop/Unity Projects/Last_Day_On_World1/.utmp/RelWithDebInfo/4f1hx454/arm64-v8a/GameActivity/CMakeFiles/edit_cache.dir
+C:/Users/Asus/Desktop/Unity Projects/Last_Day_On_World1/.utmp/RelWithDebInfo/4f1hx454/arm64-v8a/GameActivity/CMakeFiles/rebuild_cache.dir
