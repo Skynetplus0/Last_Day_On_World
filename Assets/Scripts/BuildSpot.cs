@@ -52,8 +52,15 @@ public class BuildSpot : MonoBehaviour
     public void BuildTower(GameObject towerPrefab)
     {
         if (towerPrefab == null) return;
+        if (isOccupied) return;
 
         Instantiate(towerPrefab, buildPoint.position, Quaternion.identity);
         isOccupied = true;
+
+        var rend = GetComponent<Renderer>();
+        if (rend != null) rend.enabled = false;
+
+        var col = GetComponent<Collider>();
+        if (col != null) col.enabled = false;
     }
 }
