@@ -416,7 +416,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BuildMenu
   panel: {fileID: 31355051}
   towerPrefabs:
-  - {fileID: 4562600007717168482, guid: 02c3e521db00e0741a486c8a2944afd7, type: 3}
+  - {fileID: 533159150114449637, guid: d805d4545cd6e344a8f941467492d8af, type: 3}
 --- !u!1 &218248155
 GameObject:
   m_ObjectHideFlags: 0
