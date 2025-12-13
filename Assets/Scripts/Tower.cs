@@ -1,11 +1,22 @@
-using UnityEngine;
+ï»¿using UnityEngine;
+using System.Collections;
+
+
+
 
 public class Tower : MonoBehaviour
 {
     public float range = 5f;        // menzil
-    public float fireRate = 1f;     // saniyede kaç atış
-    public float damage = 20f;      // tek atışta vereceği hasar
-    public LayerMask enemyLayer;    // hangi layer'lar düşman
+    public float fireRate = 1f;     // saniyede kaÃ§ atÄ±ÅŸ
+    public float damage = 20f;      // tek atÄ±ÅŸta vereceÄŸi hasar
+    public LayerMask enemyLayer;    // hangi layer'lar dÃ¼ÅŸman
+
+
+
+    public GameObject projectilePrefab;
+    public Transform firePoint;
+
+
 
     private float fireCountdown = 0f;
 
@@ -22,13 +33,13 @@ public class Tower : MonoBehaviour
 
     void ShootAtNearestEnemy()
     {
-        // Kule etrafında menzil kadar bir küre içinde düşman ara
+        // Kule etrafÄ±nda menzil kadar bir kÃ¼re iÃ§inde dÃ¼ÅŸman ara
         Collider[] hits = Physics.OverlapSphere(transform.position, range, enemyLayer);
 
         if (hits.Length == 0)
             return;
 
-        // En yakındaki düşmanı bul (isteğe göre direkt hits[0] da kullanabilirsin)
+        // En yakÄ±ndaki dÃ¼ÅŸmanÄ± bul (isteÄŸe gÃ¶re direkt hits[0] da kullanabilirsin)
         Collider nearest = null;
         float nearestDist = Mathf.Infinity;
 
@@ -44,6 +55,17 @@ public class Tower : MonoBehaviour
 
         if (nearest != null)
         {
+
+            GameObject p = Instantiate(
+     projectilePrefab,
+     firePoint.position,
+     Quaternion.identity
+ );
+            p.GetComponent<Mermi>().Init(nearest.transform);
+
+
+
+
             Enemy enemy = nearest.GetComponent<Enemy>();
             if (enemy != null)
             {
@@ -52,7 +74,7 @@ public class Tower : MonoBehaviour
         }
     }
 
-    // Editörde menzili görsel olarak çizmek için
+    // EditÃ¶rde menzili gÃ¶rsel olarak Ã§izmek iÃ§in
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
