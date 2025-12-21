@@ -21,7 +21,7 @@ public class EnemySpawner : MonoBehaviour
     [Header("Manual Wave Spawning")]
     // useTimedSpawn kapalıysa bunu kullan
     public int number_of_enemy = 1;
-    public bool autoSpawnOnStart = true;   // Oyunun başında otomatik dalga istiyorsan
+    public bool autoSpawnOnStart = false;   // Oyunun başında otomatik dalga istiyorsan
 
 
     [Header("Wave UI")]

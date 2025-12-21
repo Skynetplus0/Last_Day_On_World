@@ -1,3 +1,4 @@
+using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
@@ -7,6 +8,8 @@ public class CameraController : MonoBehaviour
     public float smoothTime = 0.15f;       // yumuşatma süresi
 
     private Vector3 velocity = Vector3.zero;
+
+    bool isLocked = true;
 
     void CameraMovement()
     {
@@ -44,10 +47,11 @@ public class CameraController : MonoBehaviour
     public float normalZoom = 60f;      // normal uzaklık
     public float zoomedIn = 40f;        // çift tıklayınca yaklaşacağı değer
     public float zoomSpeed = 10f;       // zoom animasyon hızı
+    public float maxZoom = 60f;
+    public float minZoom = 20f;
+    public float zoomStep = 10f;
 
     private float targetZoom;
-    private float lastClickTime = 0f;
-    private float doubleClickDelay = 0.25f; // çift tıklama süresi
 
     void Start()
     {
@@ -56,32 +60,21 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
-        CameraMovement();
+        if(!isLocked)
+        {
+            CameraMovement();
+        }
         HandleDoubleClickZoom();
-        SmoothZoom();
+        SmoothZoom();   
+        if(Input.GetMouseButtonDown(1)) isLocked = !isLocked;
     }
 
     void HandleDoubleClickZoom()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (Time.time - lastClickTime < doubleClickDelay)
-            {
-                // ÇİFT TIKLAMA ALGILANDI
-                if (Mathf.Abs(targetZoom - normalZoom) < 0.1f)
-                {
-                    // Zoom In
-                    targetZoom = zoomedIn;
-                }
-                else
-                {
-                    // Zoom Out
-                    targetZoom = normalZoom;
-                }
-            }
-
-            lastClickTime = Time.time;
-        }
+        float scroll = Input.GetAxis("Mouse ScrollWheel");
+        if(scroll > 0) targetZoom -= zoomStep;
+        if(scroll < 0) targetZoom += zoomStep;
+        targetZoom = Mathf.Clamp(targetZoom, minZoom, maxZoom);
     }
 
     void SmoothZoom()

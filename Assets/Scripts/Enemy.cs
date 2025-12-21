@@ -4,6 +4,7 @@ public class Enemy : MonoBehaviour
 {
     public float maxHealth = 100f;
     private float currentHealth;
+    private EnemySpawnerNew spawner;
 
     private void Start()
     {
@@ -20,10 +21,16 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    public void setSpawner(EnemySpawnerNew s)
+    {
+        spawner = s;
+    }
+
     private void Die()
     {
         // �stersen death animasyonu vs. ekleyebilirsin
         CoinManager.Instance.AddCoins(20); //Sonra değiştirilir 
+        spawner?.onEnemyKilled();
         Destroy(gameObject);
         
     }
