@@ -136,16 +136,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce9912d7ab0ff754c961880180618618, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShootingTower
-  tickRate: 1
-  range: 5
-  damage: 20
+  tickRate: 5
+  range: 10
+  damage: 60
   enemyLayer:
     serializedVersion: 2
     m_Bits: 8
   projectilePrefab: {fileID: 4348028907502355277, guid: 6670a74dbf27f3c43b606187f15727ce, type: 3}
   firePoint: {fileID: 4755283370652332227}
+  fireRate: 2
   model: {fileID: 7921400821158139828}
-  turnSpeed: 10
+  turnSpeed: 360
 --- !u!4 &877632107816579679 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7bd9ebe759b71aa4a813c3234d2c1fd1, type: 3}

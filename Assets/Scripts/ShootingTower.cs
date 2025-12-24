@@ -10,6 +10,8 @@ public class ShootingTower : TowerBase
     [Header("Shooting")]
     public GameObject projectilePrefab;
     public Transform firePoint;
+    public float fireRate = 2f; // saniyede 2 mermi
+    float fireTimer;
 
     [Header("Model Rotation")]
     public Transform model;      // ← assign ModelRoot here
@@ -21,17 +23,33 @@ public class ShootingTower : TowerBase
     {
         base.Update();
 
-        if (currentTarget != null)
-            RotateModelTowards(currentTarget);
-    }
+        currentTarget = FindNearestEnemy();
 
+        if (currentTarget != null)
+        {
+            RotateModelTowards(currentTarget);
+
+            fireTimer -= Time.deltaTime;
+            if (fireTimer <= 0f)
+            {
+                Shoot(currentTarget);
+                fireTimer = 1f / fireRate;
+            }
+        }
+        else
+        {
+            fireTimer = 0f; // istersen hedef yokken sıfırla
+        }
+    }
     protected override void OnTick()
     {
+        /*
         currentTarget = FindNearestEnemy();
         if (currentTarget == null) return;
 
         Shoot(currentTarget);
-    }
+    */
+        }
 
     Transform FindNearestEnemy()
     {
@@ -56,19 +74,21 @@ public class ShootingTower : TowerBase
 
     void RotateModelTowards(Transform target)
     {
-        if (model == null) return;
+        if (model == null || target == null) return;
 
         Vector3 dir = target.position - model.position;
-        dir.y = 0f; // lock vertical rotation
+        dir.y = 0f;
+        if (dir.sqrMagnitude < 0.0001f) return;
 
         Quaternion targetRot = Quaternion.LookRotation(dir);
-        model.rotation = Quaternion.Lerp(
+
+        // turnSpeed = derece/saniye gibi düşün
+        model.rotation = Quaternion.RotateTowards(
             model.rotation,
             targetRot,
-            Time.deltaTime * turnSpeed
+            turnSpeed * Time.deltaTime
         );
     }
-
     void Shoot(Transform target)
     {
         GameObject p = Instantiate(

@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
+        spawner=FindFirstObjectByType<EnemySpawnerNew>();
         currentHealth = maxHealth;
     }
 
@@ -30,7 +31,9 @@ public class Enemy : MonoBehaviour
     {
         // �stersen death animasyonu vs. ekleyebilirsin
         CoinManager.Instance.AddCoins(20); //Sonra değiştirilir 
-        spawner?.onEnemyKilled();
+       // spawner?.onEnemyKilled();
+       spawner.onEnemyKilled();
+
         Destroy(gameObject);
         
     }

@@ -6,6 +6,8 @@ using UnityEngine.UI;
 using TMPro;
 using NUnit.Framework;
 using UnityEditor;
+using UnityEngine.SceneManagement;
+
 
 public class EnemySpawnerNew : MonoBehaviour
 {
@@ -14,6 +16,11 @@ public class EnemySpawnerNew : MonoBehaviour
     private int currentWave = -1;
     private bool isSpawning = false;
     private int aliveEnemies = 0;
+
+    [Header("Level Progression")]
+    public float nextLevelDelay = 2f; // paneli gösterdikten kaç sn sonra geçsin
+
+
 
     [Header("Wave UI")]
     public GameObject waveUIPanel;
@@ -73,12 +80,45 @@ public class EnemySpawnerNew : MonoBehaviour
     public void onEnemyKilled()
     {
         aliveEnemies--;
-        if(aliveEnemies <= 0 && !isSpawning) waveCompleted();
+        if (aliveEnemies <= 0 && !isSpawning)
+        {
+         
+            waveCompleted();
+
+        }
     }
+
+    IEnumerator LoadNextSceneAfterDelay()
+    {
+        yield return new WaitForSeconds(nextLevelDelay);
+
+        int currentIndex = SceneManager.GetActiveScene().buildIndex;
+        int nextIndex = currentIndex + 1;
+
+        if (nextIndex < SceneManager.sceneCountInBuildSettings)
+        {
+            SceneManager.LoadScene(nextIndex);
+        }
+        else
+        {
+            Debug.Log("Son level bitti! Build Settings'te sonraki sahne yok.");
+        }
+    }
+
+
+
+
 
     void waveCompleted()
     {
-        waveCompletedText.text = $"Wave {currentWave+1} Completed!";
+        waveCompletedText.text = $"Wave {currentWave + 1} Completed!";
         waveUIPanel.SetActive(true);
+
+        // SON WAVE BİTTİYSE -> NEXT SCENE
+        bool lastWave = (currentWave >= waves.Count - 1);
+        if (lastWave)
+        {
+            StartCoroutine(LoadNextSceneAfterDelay());
+        }
     }
 }
