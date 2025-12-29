@@ -63,6 +63,10 @@ public class BuildMenu : MonoBehaviour
         }
 
         int cost = 100; // Sabit kule ücreti
+        if(towerPrefabs[index].GetComponent<TowerBase>() != null)
+        {
+            cost = towerPrefabs[index].GetComponent<TowerBase>().cost;
+        }
 
         // CoinManager null kontrolü
         if (CoinManager.Instance == null)

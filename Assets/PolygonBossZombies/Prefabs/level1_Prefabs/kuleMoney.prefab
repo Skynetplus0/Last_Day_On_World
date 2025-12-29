@@ -102,6 +102,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23c772b95f5cbc14bb5a820fa70856cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  tickRate: 1
+  cost: 50
+  moneyPerTick: 10
 --- !u!4 &877632107816579679 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7bd9ebe759b71aa4a813c3234d2c1fd1, type: 3}
