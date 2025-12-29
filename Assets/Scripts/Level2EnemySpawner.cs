@@ -30,6 +30,9 @@ public class Level2EnemySpawner : MonoBehaviour
     public GameObject waveUIPanel;
     public TextMeshProUGUI waveCompletedText;
     public Button startWaveButton;
+    
+    [Header("Wave Progress")]
+    public WaveProgressUI waveProgressUI;
 
     private int currentWaveIndex = 0;
     private bool isSpawning = false;
@@ -142,6 +145,10 @@ public class Level2EnemySpawner : MonoBehaviour
     void WaveCompleted()
     {
         Debug.Log($"[Spawner] WaveCompleted called for waveIndex={currentWaveIndex}");
+
+        // Wave Progress UI güncelle
+        if (waveProgressUI != null)
+            waveProgressUI.OnWaveCompleted();
 
         // SAFELY update UI (check nulls)
         if (waveCompletedText != null)
