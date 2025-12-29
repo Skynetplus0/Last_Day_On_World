@@ -43,13 +43,42 @@ public class BuildMenu : MonoBehaviour
         currentSpot = null;
     }
 
-    // UI Button'lar buray� �a��racak
+    // UI Button'lar burayı çağıracak
     public void BuildTower(int index)
     {
-        if (currentSpot == null) return;
-        if (towerPrefabs == null || index < 0 || index >= towerPrefabs.Length) return;
+        if (currentSpot == null)
+        {
+            Debug.LogWarning("[BuildMenu] currentSpot is null!");
+            return;
+        }
+        if (towerPrefabs == null || index < 0 || index >= towerPrefabs.Length)
+        {
+            Debug.LogWarning("[BuildMenu] Invalid tower index or prefabs!");
+            return;
+        }
+        if (towerPrefabs[index] == null)
+        {
+            Debug.LogWarning("[BuildMenu] Tower prefab at index is null!");
+            return;
+        }
+        int cost = 100;
+        if(towerPrefabs[index].GetComponent<TowerBase>() == null)
+        {
+             cost = 100;
+        }
+        else
+        {
+             cost = towerPrefabs[index].GetComponent<TowerBase>().cost;
+        }
 
-        int cost = 100; // Sabit kule ücreti
+        // CoinManager null kontrolü
+        if (CoinManager.Instance == null)
+        {
+            Debug.LogWarning("[BuildMenu] CoinManager.Instance is null! Building anyway...");
+            currentSpot.BuildTower(towerPrefabs[index]);
+            Close();
+            return;
+        }
 
         if (CoinManager.Instance.SpendCoins(cost))
         {

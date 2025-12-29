@@ -9,7 +9,6 @@ public class CameraController : MonoBehaviour
 
     private Vector3 velocity = Vector3.zero;
 
-    bool isLocked = true;
 
     void CameraMovement()
     {
@@ -50,6 +49,8 @@ public class CameraController : MonoBehaviour
     public float maxZoom = 60f;
     public float minZoom = 20f;
     public float zoomStep = 10f;
+    private float lastClickTime = 0f;
+    private float doubleClickDelay = 0.25f;
 
     private float targetZoom;
 
@@ -60,21 +61,28 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
-        if(!isLocked)
-        {
-            CameraMovement();
-        }
+        CameraMovement();
         HandleDoubleClickZoom();
         SmoothZoom();   
-        if(Input.GetMouseButtonDown(1)) isLocked = !isLocked;
     }
 
     void HandleDoubleClickZoom()
     {
-        float scroll = Input.GetAxis("Mouse ScrollWheel");
-        if(scroll > 0) targetZoom -= zoomStep;
-        if(scroll < 0) targetZoom += zoomStep;
-        targetZoom = Mathf.Clamp(targetZoom, minZoom, maxZoom);
+        if(Input.GetMouseButtonDown(0))
+        {
+            if(Time.time - lastClickTime < doubleClickDelay)
+            {
+                if(Mathf.Abs(targetZoom - normalZoom) < 0.1f)
+                {
+                    targetZoom = zoomedIn;
+                }
+                else
+                {
+                    targetZoom = normalZoom;
+                }
+            }
+            lastClickTime = Time.time;
+        }
     }
 
     void SmoothZoom()
