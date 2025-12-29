@@ -5,7 +5,7 @@ public class BuildSpot : MonoBehaviour
     public bool isOccupied = false;      // Bu slota kule dikildi mi?
     public Transform buildPoint;         // Kule tam nereye konacak?
 
-    //Kulelerin bakacaï¿½ï¿½ nokta onun iï¿½in noktalar koycam
+    //Kulelerin bakacaðý nokta onun için noktalar koycam
     public Transform look_Target;
 
     private void Start()
@@ -20,7 +20,7 @@ public class BuildSpot : MonoBehaviour
     private void OnMouseDown()
     {
         Debug.Log("BuildSpot clicked: " + name);
-        // Eï¿½er zaten kule varsa, bir ï¿½ey yapma
+        // Eðer zaten kule varsa, bir þey yapma
         if (isOccupied) return;
 
         if (BuildMenu.Instance == null)
@@ -30,7 +30,7 @@ public class BuildSpot : MonoBehaviour
         }
 
 
-        // Menï¿½ aï¿½, bu spotu gï¿½nder
+        // Menü aç, bu spotu gönder
         BuildMenu.Instance.Open(this);
     }
 
@@ -51,8 +51,8 @@ public class BuildSpot : MonoBehaviour
     }
 
 
-    // BuildMenu burayï¿½ ï¿½aï¿½ï¿½racak
-    public float y_Rotation_Offset = 180f;//ayarlanacak yoksa doï¿½ru dï¿½nmï¿½yor
+    // BuildMenu burayý çaðýracak
+    public float y_Rotation_Offset = 180f;//ayarlanacak yoksa doðru dönmüyor
 
     public void BuildTower(GameObject towerPrefab)
     {
@@ -64,14 +64,14 @@ public class BuildSpot : MonoBehaviour
         if(look_Target != null) {
         
         Vector3 dir = look_Target.position- tower.transform.position;
-         dir.y = 0f;//Y ekseni bozulmasï¿½n
+         dir.y = 0f;//Y ekseni bozulmasýn
 
             if(dir.sqrMagnitude > 0.001f)
             {
                 Quaternion baseRot = Quaternion.LookRotation(dir);
 
-                // EKSEN FARKI ï¿½ï¿½ï¿½N Y OFFSET
-                // Silah +X'e bakï¿½yorsa genelde -90 veya +90 derece gerekir
+                // EKSEN FARKI ÝÇÝN Y OFFSET
+                // Silah +X'e bakýyorsa genelde -90 veya +90 derece gerekir
                 tower.transform.rotation = baseRot * Quaternion.Euler(0f, y_Rotation_Offset, 0f);
             }
 

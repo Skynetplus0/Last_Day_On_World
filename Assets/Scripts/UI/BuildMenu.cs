@@ -61,14 +61,11 @@ public class BuildMenu : MonoBehaviour
             Debug.LogWarning("[BuildMenu] Tower prefab at index is null!");
             return;
         }
-        int cost = 100;
-        if(towerPrefabs[index].GetComponent<TowerBase>() == null)
+
+        int cost = 100; // Sabit kule ücreti
+        if(towerPrefabs[index].GetComponent<TowerBase>() != null)
         {
-             cost = 100;
-        }
-        else
-        {
-             cost = towerPrefabs[index].GetComponent<TowerBase>().cost;
+            cost = towerPrefabs[index].GetComponent<TowerBase>().cost;
         }
 
         // CoinManager null kontrolü
