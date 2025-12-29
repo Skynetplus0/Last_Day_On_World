@@ -113,21 +113,7 @@ public class EnemyMoverNode : MonoBehaviour
     // DEATH HANDLING
     void ReachEnd()
     {
-        // Eve ulaştı - hasar ver
-        Enemy enemy = GetComponent<Enemy>();
-        if (enemy != null)
-        {
-            enemy.ReachBase();
-        }
-        else
-        {
-            // Fallback: BaseHealth'e doğrudan hasar ver
-            if (BaseHealth.Instance != null)
-            {
-                BaseHealth.Instance.TakeDamage(10);
-            }
-            FinishEnemy();
-        }
+        FinishEnemy();
     }
 
     // Enemy ölünce çağırılacak
