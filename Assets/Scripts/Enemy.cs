@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
     
     [Header("Damage to Base")]
     [Tooltip("Eve ulaşınca vereceği hasar")]
-    public int damageToBase = 10;
+    public int damageToBase = 1;
     
     [Header("Rewards")]
     [Tooltip("Öldürüldüğünde kazanılan para")]
@@ -97,10 +97,17 @@ public class Enemy : MonoBehaviour
     /// <summary>
     /// Eve ulaştığında çağrılır (EnemyMover tarafından)
     /// </summary>
+    /// 
+    private bool reachedBase=false;
+
     public void ReachBase()
     {
-        if (isDead) return;
+        if (isDead || reachedBase) return;
         
+
+        reachedBase = true;
+        isDead = true;
+
         // Base'e hasar ver
         if (BaseHealth.Instance != null)
         {
