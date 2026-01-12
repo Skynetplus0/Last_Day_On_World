@@ -76,6 +76,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 6397918721905018242, guid: 885e1e664ff9540dcbf5d4c888fbe67a, type: 3}
+      propertyPath: isBoss
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6499033582550260491, guid: 885e1e664ff9540dcbf5d4c888fbe67a, type: 3}
       propertyPath: m_Layer
       value: 3
@@ -119,6 +123,10 @@ PrefabInstance:
     - target: {fileID: 8639823662398534024, guid: 885e1e664ff9540dcbf5d4c888fbe67a, type: 3}
       propertyPath: m_Layer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8639823662398534024, guid: 885e1e664ff9540dcbf5d4c888fbe67a, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 8740171195261080518, guid: 885e1e664ff9540dcbf5d4c888fbe67a, type: 3}
       propertyPath: m_Layer

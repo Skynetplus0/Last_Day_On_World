@@ -88,4 +88,9 @@ public class ScoreManager : MonoBehaviour
         currentScore = 0;
         UpdateUI();
     }
+    
+    public int GetScore()
+    {
+        return currentScore;
+    }
 }

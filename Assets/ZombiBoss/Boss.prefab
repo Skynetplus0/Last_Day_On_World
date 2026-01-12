@@ -12,9 +12,17 @@ PrefabInstance:
       propertyPath: waypoints.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6397918721905018242, guid: 885e1e664ff9540dcbf5d4c888fbe67a, type: 3}
+      propertyPath: isBoss
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8639823662398534024, guid: 885e1e664ff9540dcbf5d4c888fbe67a, type: 3}
       propertyPath: m_Name
       value: Boss
+      objectReference: {fileID: 0}
+    - target: {fileID: 8639823662398534024, guid: 885e1e664ff9540dcbf5d4c888fbe67a, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 8983838432723151666, guid: 885e1e664ff9540dcbf5d4c888fbe67a, type: 3}
       propertyPath: m_LocalPosition.x

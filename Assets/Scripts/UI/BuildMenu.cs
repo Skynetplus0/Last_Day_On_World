@@ -76,6 +76,11 @@ public class BuildMenu : MonoBehaviour
         if (CoinManager.Instance.SpendCoins(cost))
         {
             currentSpot.BuildTower(towerPrefabs[index]);
+            
+            // Kule insa sesi cal
+            if (SoundManager.Instance != null)
+                SoundManager.Instance.PlayBuild();
+                
             Close();
         }
     }

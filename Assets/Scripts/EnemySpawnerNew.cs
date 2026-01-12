@@ -56,9 +56,29 @@ public class EnemySpawnerNew : MonoBehaviour
     IEnumerator spawnWaveRoutine(Wave wave)
     {
         isSpawning = true;
+        
+        // Wave baslangic sesi cal (muzik devam etsin)
+        if (SoundManager.Instance != null)
+            SoundManager.Instance.PlayWaveStart();
+        
+        // Zombiler gelmeden once kisa bekleme (gerilim)
+        yield return new WaitForSeconds(2f);
+        
         foreach(var enemyType in wave.enemies)
         {
             if(enemyType.enemyPrefab == null) continue;
+            
+            bool isBoss = enemyType.enemyPrefab.name.ToLower().Contains("boss");
+            
+            // Her enemy tipi icin 1 KEZ ses cal (ilk zombide)
+            if (SoundManager.Instance != null)
+            {
+                if (isBoss)
+                    SoundManager.Instance.PlayBossZombieSpawn();
+                else
+                    SoundManager.Instance.PlayZombieSpawn();
+            }
+            
             for(int i = 0; i < enemyType.count; i++)
             {
                 spawnEnemies(enemyType.enemyPrefab);
@@ -112,13 +132,30 @@ public class EnemySpawnerNew : MonoBehaviour
     void waveCompleted()
     {
         waveCompletedText.text = $"Wave {currentWave + 1} Completed!";
-        waveUIPanel.SetActive(true);
-
-        // SON WAVE BİTTİYSE -> NEXT SCENE
+        
+        // SON WAVE BITTIYSE -> Level Complete paneli goster
         bool lastWave = (currentWave >= waves.Count - 1);
         if (lastWave)
         {
-            StartCoroutine(LoadNextSceneAfterDelay());
+            // Level Complete UI goster
+            if (LevelCompleteUI.Instance != null)
+            {
+                int score = ScoreManager.Instance != null ? ScoreManager.Instance.GetScore() : 0;
+                int coins = CoinManager.Instance != null ? CoinManager.Instance.coins : 0;
+                int wavesCompleted = currentWave + 1;
+                
+                string levelName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.ToUpper();
+                LevelCompleteUI.Instance.ShowLevelComplete(levelName, score, coins, wavesCompleted);
+            }
+            else
+            {
+                // Fallback - eski davranis
+                StartCoroutine(LoadNextSceneAfterDelay());
+            }
+        }
+        else
+        {
+            waveUIPanel.SetActive(true);
         }
     }
 }

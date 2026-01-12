@@ -481,6 +481,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   maxHealth: 250
+  isBoss: 1
+  damageToBase: 1
+  coinReward: 20
 --- !u!65 &8400113125244969510
 BoxCollider:
   m_ObjectHideFlags: 0

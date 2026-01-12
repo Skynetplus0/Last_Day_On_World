@@ -10,12 +10,15 @@ public class Enemy : MonoBehaviour
     public float maxHealth = 100f;
     private float currentHealth;
     
+    [Header("Enemy Type")]
+    public bool isBoss = false;
+    
     [Header("Damage to Base")]
-    [Tooltip("Eve ulaşınca vereceği hasar")]
+    [Tooltip("Eve ulasinca verecegi hasar")]
     public int damageToBase = 1;
     
     [Header("Rewards")]
-    [Tooltip("Öldürüldüğünde kazanılan para")]
+    [Tooltip("Olduruldugunde kazanilan para")]
     public int coinReward = 20;
     
     private EnemySpawnerNew spawner;
@@ -64,20 +67,29 @@ public class Enemy : MonoBehaviour
     }
 
     /// <summary>
-    /// Zombie öldüğündex
+    /// Zombie oldugunde
     /// </summary>
     private void Die()
     {
         if (isDead) return;
         isDead = true;
         
-        // Para kazandır
+        // Olum sesi cal (boss ve normal icin ayri)
+        if (SoundManager.Instance != null)
+        {
+            if (isBoss)
+                SoundManager.Instance.PlayBossDeath();
+            else
+                SoundManager.Instance.PlayZombieDeath();
+        }
+        
+        // Para kazandir
         if (CoinManager.Instance != null)
         {
             CoinManager.Instance.AddCoins(coinReward);
         }
         
-        // Puan kazandır
+        // Puan kazandir
         if (ScoreManager.Instance != null)
         {
             ScoreManager.Instance.AddKillPoints();
@@ -88,8 +100,6 @@ public class Enemy : MonoBehaviour
         {
             spawner.onEnemyKilled();
         }
-        
-        // Opsiyonel: Ölüm efekti/animasyonu burada
         
         Destroy(gameObject);
     }
